@@ -1,0 +1,13 @@
+name: ci checks
+
+on: push
+
+jobs:
+    test-client:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: build client, run CI checks
+              run: ./ci-client.sh
+            - name: build api, run CI checks
+              run: ./ci-api.sh

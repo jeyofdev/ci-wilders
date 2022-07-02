@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+    api-ci:
+        build:
+            context: ./api
+            target: ci
+        depends_on:
+            - database
+        environment:
+            - DATABASE_TEST_URL=postgresql://postgres:database_password@database-test:5432/postgres?schema=public
+
+    database-test:
+        image: postgres
+        restart: always
+        # ports:
+        #     - 5432:5432
+        environment:
+            POSTGRES_PASSWORD: database_password

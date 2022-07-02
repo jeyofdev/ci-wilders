@@ -1,0 +1,32 @@
+.btn-link {
+    text-decoration: none;
+    background-color: #f76c6c;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.btn-card-link {
+    padding: 0.5rem;
+    border-radius: 0.4rem;
+    border: none;
+    background-color: #f76c6c;
+    color: white;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.btn-info {
+    background-color: #8b9aee !important;
+}
+
+.btn-success {
+    background-color: #77be79 !important;
+}
+
+p {
+    margin: 0;
+}

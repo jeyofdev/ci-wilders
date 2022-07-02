@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+    api:
+        build:
+            context: ./api
+            target: development
+        # hot reload
+        volumes:
+            - ./api:/app
+            - /app/node_modules
+        depends_on:
+            - database
+            - database-test
+        ports:
+            - 4040:4000
+        environment:
+            - DATABASE_URL=postgresql://postgres:database_password@database:5432/postgres?schema=public
+            - DATABASE_TEST_URL=postgresql://postgres:database_password@database-test:5432/postgres?schema=public
+
+    database:
+        image: postgres
+        restart: always
+        # ports:
+        #     - 5432:5432
+        environment:
+            POSTGRES_PASSWORD: database_password
+        volumes:
+            - postgres-volume:/var/lib/postgresql/data
+
+    database-test:
+        image: postgres
+        restart: always
+        # ports:
+        #     - 5432:5432
+        environment:
+            POSTGRES_PASSWORD: database_password
+
+    client:
+        build:
+            context: ./client
+            target: development
+        # hot reload
+        volumes:
+            - ./client:/app
+            - /app/node_modules
+        ports:
+            - 3000:3000
+        depends_on:
+            - api
+
+# disque dur virtuel
+volumes:
+    postgres-volume:
